@@ -6,8 +6,18 @@ query animeData($id: Int) { # Define which variables will be used in the query (
             english
             native
         }
+        startDate {
+            year
+            month
+            day
+        }
+        endDate {
+            year
+            month
+            day
+        }
     }
 }
 #type Query {
 #    ping: String @deprecated(reason: "https://stackoverflow.com/")
-#}
+#}}

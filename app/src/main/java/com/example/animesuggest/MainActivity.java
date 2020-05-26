@@ -1,3 +1,4 @@
+
 package com.example.animesuggest;
 
 import androidx.annotation.NonNull;
@@ -20,29 +21,12 @@ import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-
+import com.apollographql.apollo.ApolloClient;
+import com.example.AnimeDataQuery;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
-
-//    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-//        @Override
-//        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//            switch (item.getItemId()) {
-//                case R.id.home_button:
-//                    Log.d("HOME", "home is clickable");
-//                    return true;
-//                case R.id.favorite_button:
-//                    Log.d("FAVORITE", "favorite is clickable");
-//                    return true;
-//                case R.id.search_button:
-//                    Log.d("SEARCH", "search is clickable");
-//                    return true;
-//            }
-//            return false;
-//        }
-//    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new HomeFragment()).commit();
         }
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -66,14 +51,14 @@ public class MainActivity extends AppCompatActivity {
 
                     switch(item.getItemId()) {
                         case R.id.home_button:
-                            selectedFragment = new HomeFragment();
-                            break;
+                        selectedFragment = new HomeFragment();
+                        break;
                         case R.id.search_button:
-                            selectedFragment = new SearchFragment();
-                            break;
+                        selectedFragment = new SearchFragment();
+                        break;
                         case R.id.favorite_button:
-                            selectedFragment = new FavoritesFragment();
-                            break;
+                        selectedFragment = new FavoritesFragment();
+                        break;
                     }
                     FragmentManager fragMan = getSupportFragmentManager();
                     fragMan.beginTransaction().replace(R.id.fragment_container,
@@ -81,20 +66,6 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             };
-
-//        bottomNavigationView = findViewById(R.id.bottomNavigation);
-//        Log.d("123BottomNav", (R.id.bottomNavigation)+"");
-//
-
-//        myButton = findViewById(R.id.button);
-//        myButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(getApplicationContext(), SearchActivity.class);
-//                startActivity(i);
-//            }
-//    });
-
 
 
 }

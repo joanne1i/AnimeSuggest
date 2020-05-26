@@ -10,6 +10,12 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
     defaultConfig {
         applicationId "com.example.animesuggest"
         minSdkVersion 15
@@ -35,11 +41,6 @@ apollo {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation("com.apollographql.apollo:apollo-runtime:2.1.0")
-    compileOnly("org.jetbrains:annotations:13.0")
-    testCompileOnly("org.jetbrains:annotations:13.0")
-
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.google.android.material:material:1.1.0'
@@ -51,5 +52,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    implementation("com.apollographql.apollo:apollo-runtime:2.1.0")
+    compileOnly("org.jetbrains:annotations:13.0")
+    testCompileOnly("org.jetbrains:annotations:13.0")
+
+    implementation 'com.orhanobut:logger:2.2.0'
 
 }

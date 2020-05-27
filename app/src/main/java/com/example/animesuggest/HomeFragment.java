@@ -1,11 +1,14 @@
 package com.example.animesuggest;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +22,7 @@ import com.apollographql.apollo.exception.ApolloException;
 import com.example.AnimeDataQuery;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Text;
@@ -27,7 +31,7 @@ import okhttp3.OkHttpClient;
 
 public class HomeFragment extends Fragment {
     TextView myTextView;
-
+    ImageView myImageView;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,15 +53,25 @@ public class HomeFragment extends Fragment {
                 Log.d("123test", "plz");
                 apolloClient.query(
                         AnimeDataQuery.builder()
-                                .id(1)
+                                .id(98977)
                                 .build()
                 ).enqueue(new ApolloCall.Callback<AnimeDataQuery.Data>() {
                     @Override
                     public void onResponse(@NotNull Response<AnimeDataQuery.Data> response) {
                         String data = "";
                         myTextView = (TextView)getView().findViewById(R.id.text_box);
-                       data = response.getData().Media().title().romaji() +'\n' + response.getData().Media().title().native_();
+                        myImageView = (ImageView)getView().findViewById(R.id.animeImage);
+                        data = response.getData().Media().title().romaji() +'\n' + response.getData().Media().title().native_();
                         myTextView.setText(data);
+                        Handler uiHandler = new Handler(Looper.getMainLooper());
+                        uiHandler.post(new Runnable(){
+                            @Override
+                            public void run() {
+                                Picasso.get()
+                                        .load(response.getData().Media().coverImage().large())
+                                        .into(myImageView);
+                            }
+                        });
                         Logger.d(response.getData().toString());
                     }
                     @Override

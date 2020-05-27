@@ -22,7 +22,6 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.apollographql.apollo.ApolloClient;
-import com.example.AnimeDataQuery;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 

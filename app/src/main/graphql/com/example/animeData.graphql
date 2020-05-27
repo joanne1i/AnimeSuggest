@@ -1,0 +1,39 @@
+query seasonal($perPage: Int) {
+    Page(perPage: $perPage, page: 1) {
+        media(season: SPRING, seasonYear: 2020, type: ANIME) {
+            id
+            season
+            seasonYear
+            title {
+                romaji
+                native
+            }
+            coverImage {
+                large
+            }
+        }
+    }
+}
+
+query animeData($id: Int) {
+    Media(id: $id, type: ANIME) {
+        id
+        title {
+            romaji
+            english
+            native
+        }
+        startDate {
+            year
+            month
+        }
+        endDate {
+            year
+            month
+        }
+        seasonYear
+        coverImage {
+            large
+        }
+    }
+}

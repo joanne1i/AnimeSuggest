@@ -8,7 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,7 +23,7 @@ import com.apollographql.apollo.ApolloCall;
 import com.apollographql.apollo.ApolloClient;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
-import com.example.AnimeDataQuery;
+import com.example.SeasonalQuery;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
@@ -30,8 +34,12 @@ import org.w3c.dom.Text;
 import okhttp3.OkHttpClient;
 
 public class HomeFragment extends Fragment {
-    TextView myTextView;
+//    TextView myTextView;
     ImageView myImageView;
+    LinearLayout layout;
+    Thread thread;
+    int i = 0;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,48 +47,61 @@ public class HomeFragment extends Fragment {
 //        return inflater.inflate(R.layout.fragment_home, container, false);
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         Logger.addLogAdapter(new AndroidLogAdapter());
-
+        layout = (LinearLayout) view.findViewById(R.id.scrollView);
         OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
-
+        GridLayout gridLayout = new GridLayout(getContext());
+        TextView tv = new TextView(getContext());
+        tv.setLayoutParams(lparams);
         ApolloClient apolloClient = ApolloClient.builder()
                 .serverUrl("https://graphql.anilist.co")
                 .okHttpClient(okHttpClient)
                 .build();
-        Button button = (Button)view.findViewById(R.id.btn_press);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("123test", "plz");
-                apolloClient.query(
-                        AnimeDataQuery.builder()
-                                .id(98977)
+//        Button button = (Button)view.findViewById(R.id.btn_press);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d("123test", "plz");
+            apolloClient.query(
+                        SeasonalQuery.builder()
+                                .perPage(5)
                                 .build()
-                ).enqueue(new ApolloCall.Callback<AnimeDataQuery.Data>() {
+                ).enqueue(new ApolloCall.Callback<SeasonalQuery.Data>() {
                     @Override
-                    public void onResponse(@NotNull Response<AnimeDataQuery.Data> response) {
+                    public void onResponse(@NotNull Response<SeasonalQuery.Data> response) {
                         String data = "";
-                        myTextView = (TextView)getView().findViewById(R.id.text_box);
-                        myImageView = (ImageView)getView().findViewById(R.id.animeImage);
-                        data = response.getData().Media().title().romaji() +'\n' + response.getData().Media().title().native_();
-                        myTextView.setText(data);
-                        Handler uiHandler = new Handler(Looper.getMainLooper());
-                        uiHandler.post(new Runnable(){
-                            @Override
-                            public void run() {
-                                Picasso.get()
-                                        .load(response.getData().Media().coverImage().large())
-                                        .into(myImageView);
-                            }
-                        });
-                        Logger.d(response.getData().toString());
+//                        myTextView = (TextView)getView().findViewById(R.id.text_box);
+//                        myImageView = (ImageView)getView().findViewById(R.id.animeImage);
+                            data = response.getData().Page().media().get(i).title().romaji() + '\n' + response.getData().Page().media().get(1).title().native_();
+                            tv.setText(data);
+//                        Handler uiHandler = new Handler(Looper.getMainLooper());
+//                        uiHandler.post(new Runnable(){
+//                            @Override
+//                            public void run() {
+//                                Picasso.get()
+//                                        .load(response.getData().Page().media().get(0).coverImage().large())
+//                                        .into(myImageView);
+//                            }
+//                        });
+                            Logger.d(response.getData().toString());
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if(tv.getParent() != null) {
+                                        ((ViewGroup)tv.getParent()).removeView(tv); // <- fix
+                                    }
+                                    layout.addView(tv);
+                                }
+                            });
+                            i++;
+
                     }
                     @Override
                     public void onFailure(@NotNull ApolloException e) {
                         Logger.d(e.getLocalizedMessage(), "error");
                     }
                 });
-            }
-        });
+//            }
+//        });
         return view;
     }
 }

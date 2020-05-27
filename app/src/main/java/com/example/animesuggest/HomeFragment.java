@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
         OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
         GridLayout gridLayout = new GridLayout(getContext());
         TextView tv = new TextView(getContext());
-        tv.setLayoutParams(lparams);
+//        tv.setLayoutParams(lparams);
         ApolloClient apolloClient = ApolloClient.builder()
                 .serverUrl("https://graphql.anilist.co")
                 .okHttpClient(okHttpClient)
@@ -83,16 +83,16 @@ public class HomeFragment extends Fragment {
 //                            }
 //                        });
                             Logger.d(response.getData().toString());
-                            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if(tv.getParent() != null) {
-                                        ((ViewGroup)tv.getParent()).removeView(tv); // <- fix
-                                    }
-                                    layout.addView(tv);
-                                }
-                            });
-                            i++;
+//                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    if(tv.getParent() != null) {
+//                                        ((ViewGroup)tv.getParent()).removeView(tv); // <- fix
+//                                    }
+//                                    layout.addView(tv);
+//                                }
+//                            });
+//                            i++;
 
                     }
                     @Override

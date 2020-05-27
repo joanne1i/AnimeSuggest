@@ -8,4 +8,7 @@
     <string name="title_favorites">Favorites</string>
     <string name="press">Press</string>
     <string name="popular_this_season">POPULAR THIS SEASON</string>
+    <string name="upcoming_next_season">UPCOMING NEXT SEASON</string>
+    <string name="all_time_popular">ALL TIME POPULAR</string>
+    <string name="view_all">View All</string>
 </resources>

@@ -79,6 +79,7 @@
                         >
 
                         <ImageView
+                            android:id="@+id/kaguya_imgview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:adjustViewBounds="true"
@@ -126,6 +127,7 @@
                         >
 
                         <ImageView
+                            android:id="@+id/tog_imgview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:adjustViewBounds="true"
@@ -173,6 +175,7 @@
                         >
 
                         <ImageView
+                            android:id="@+id/gleipnir_imgview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:adjustViewBounds="true"
@@ -262,6 +265,7 @@
                         >
 
                         <ImageView
+                            android:id="@+id/rezero_imgview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:adjustViewBounds="true"
@@ -309,6 +313,7 @@
                         >
 
                         <ImageView
+                            android:id="@+id/comedylove_imgview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:adjustViewBounds="true"
@@ -356,6 +361,7 @@
                         >
 
                         <ImageView
+                            android:id="@+id/alicization_imgview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:adjustViewBounds="true"
@@ -445,6 +451,7 @@
                         >
 
                         <ImageView
+                            android:id="@+id/aot_imgview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:adjustViewBounds="true"
@@ -492,6 +499,7 @@
                         >
 
                         <ImageView
+                            android:id="@+id/sao_imgview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:adjustViewBounds="true"
@@ -539,6 +547,7 @@
                         >
 
                         <ImageView
+                            android:id="@+id/deathnote_imgview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:adjustViewBounds="true"

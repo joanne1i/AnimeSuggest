@@ -94,6 +94,7 @@ public class AnimePageFragment extends Fragment {
 
                         data = response.getData().Media().description().replace("<i>", "");
                         data = data.replace("</i>", "");
+                        data = data.replace("<br>", "");
                         description.setText(data);
 
                         data = response.getData().Media().genres().toString().replace("[","");

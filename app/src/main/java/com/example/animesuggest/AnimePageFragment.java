@@ -46,22 +46,26 @@ public class AnimePageFragment extends Fragment {
     TextView endDate;
     TextView score;
     TextView rank;
+    int id;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_animepage, container, false);
 
+        Bundle bundle = this.getArguments();
+        if(bundle != null) {
+            id = bundle.getInt("id");
+        }
         Logger.addLogAdapter(new AndroidLogAdapter());
         OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
-        GridLayout gridLayout = new GridLayout(getContext());
-        TextView tv = new TextView(getContext());
         ApolloClient apolloClient = ApolloClient.builder()
                 .serverUrl("https://graphql.anilist.co")
                 .okHttpClient(okHttpClient)
                 .build();
         apolloClient.query(
                 AnimeDataQuery.builder()
-                        .id(112641)
+                        .id(id)
                         .build()
         ).enqueue(new ApolloCall.Callback<AnimeDataQuery.Data>() {
             @Override
@@ -117,8 +121,13 @@ public class AnimePageFragment extends Fragment {
                         rank.setText(data);
 
                         // average score
-                        avgscore = (response.getData().Media().averageScore());
-                        score.setText(avgscore+"");
+                        if(response.getData().Media().averageScore() != null) {
+                            avgscore = (response.getData().Media().averageScore());
+                            score.setText(avgscore + "");
+                        }
+                        else {
+                            score.setText("N/A");
+                        }
 
                         // cover image
                         Handler uiHandler = new Handler(Looper.getMainLooper());

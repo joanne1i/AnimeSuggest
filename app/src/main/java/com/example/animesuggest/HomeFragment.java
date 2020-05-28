@@ -36,8 +36,7 @@ import org.w3c.dom.Text;
 
 import okhttp3.OkHttpClient;
 
-public class HomeFragment extends Fragment {
-    ImageView kaguya;
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Nullable
     @Override
@@ -45,16 +44,79 @@ public class HomeFragment extends Fragment {
         // show the current/popular shows
 //        return inflater.inflate(R.layout.fragment_home, container, false);
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
         ((ImageView) view.findViewById(R.id.kaguya_imgview)).setOnClickListener(this::onClick);
+
+        ((ImageView) view.findViewById(R.id.tog_imgview)).setOnClickListener(this::onClick);
+
+        ((ImageView) view.findViewById(R.id.gleipnir_imgview)).setOnClickListener(this::onClick);
+
+        ((ImageView) view.findViewById(R.id.rezero_imgview)).setOnClickListener(this::onClick);
+
+        ((ImageView) view.findViewById(R.id.comedylove_imgview)).setOnClickListener(this::onClick);
+
+        ((ImageView) view.findViewById(R.id.alicization_imgview)).setOnClickListener(this::onClick);
+
+        ((ImageView) view.findViewById(R.id.aot_imgview)).setOnClickListener(this::onClick);
+
+        ((ImageView) view.findViewById(R.id.sao_imgview)).setOnClickListener(this::onClick);
+
+        ((ImageView) view.findViewById(R.id.deathnote_imgview)).setOnClickListener(this::onClick);
+
+        ((TextView) view.findViewById(R.id.popular_viewALL)).setOnClickListener(this::onClick);
+
+        ((TextView) view.findViewById(R.id.upcoming_viewALL)).setOnClickListener(this::onClick);
+
+        ((TextView) view.findViewById(R.id.alltime_viewALL)).setOnClickListener(this::onClick);
+
         return view;
     }
     public void onClick(View view) {
+        Bundle bundle = new Bundle();
+        switch(view.getId()) {
+            case R.id.kaguya_imgview:
+                bundle.putInt("id", 112641);
+                break;
+            case R.id.tog_imgview:
+                bundle.putInt("id",115230);
+                break;
+            case R.id.gleipnir_imgview:
+                bundle.putInt("id", 108241);
+                break;
+            case R.id.rezero_imgview:
+                bundle.putInt("id", 108632);
+                break;
+            case R.id.comedylove_imgview:
+                bundle.putInt("id",108489);
+                break;
+            case R.id.alicization_imgview:
+                bundle.putInt("id", 114308);
+                break;
+            case R.id.aot_imgview:
+                bundle.putInt("id", 16498);
+                break;
+            case R.id.sao_imgview:
+                bundle.putInt("id",11757);
+                break;
+            case R.id.deathnote_imgview:
+                bundle.putInt("id", 1535);
+                break;
+            case R.id.popular_viewALL:
+                Log.d("123MESS", "popularviewall");
+                break;
+            case R.id.upcoming_viewALL:
+                Log.d("123MESS", "upcomingviewall");
+                break;
+            case R.id.alltime_viewALL:
+                Log.d("123MESS", "alltimeviewall");
+                break;
+        }
         AnimePageFragment animePageFragment = new AnimePageFragment();
-        FragmentManager fragmentManager = getParentFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, animePageFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-
+        animePageFragment.setArguments(bundle);
+        getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, animePageFragment)
+                .commit();
     }
+
 }

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,17 +12,49 @@
         android:layout_height="0dp"
         android:fillViewport="true"
         android:scrollbars="vertical"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:context=".AnimePageFragment">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/backgroundColor"
+            android:orientation="vertical"
             tools:context="com.example.animesuggest.AnimePageFragment">
+
+            <TextView
+                android:id="@+id/displayromanji"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/displaypic"
+                android:layout_width="230dp"
+                android:layout_height="350dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:maxWidth="230dp"
+                android:maxHeight="350dp"
+                android:minWidth="230dp"
+                android:minHeight="350dp"/>
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="350dp"
+                android:layout_marginTop="-350dp"
+                android:layout_marginEnd="100dp"
+
+                android:text="@string/genre"
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/scoredisplay"
@@ -42,17 +75,6 @@
                 android:text="@string/rank"
                 android:textSize="12dp" />
 
-            <ImageView
-                android:id="@+id/displaypic"
-                android:layout_width="230dp"
-                android:layout_height="350dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="80dp"
-                android:maxWidth="230dp"
-                android:maxHeight="350dp"
-                android:minWidth="230dp"
-                android:minHeight="350dp" />
-
             <TextView
                 android:id="@+id/rankdisplay"
                 android:layout_width="87dp"
@@ -61,18 +83,6 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="301dp"
                 android:layout_marginEnd="-12dp" />
-
-            <TextView
-                android:id="@+id/displayromanji"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="10dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:textSize="25dp"
-                android:textStyle="bold" />
 
 
             <TextView
@@ -95,25 +105,16 @@
                 android:text="@string/air_date"
                 android:textSize="12dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="89dp"
-                android:layout_marginEnd="137dp"
-                android:text="@string/genre"
-                android:textSize="12dp" />
 
             <View
                 android:layout_width="300dp"
                 android:layout_height="1dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
                 android:layout_marginEnd="55dp"
                 android:layout_marginBottom="214dp"
-                android:background="@android:color/darker_gray"
-                android:layout_centerInParent="true"/>
+                android:background="@android:color/darker_gray" />
 
             <TextView
                 android:layout_width="75dp"
@@ -150,12 +151,12 @@
 
             <TextView
                 android:id="@+id/displaydescription"
-                android:layout_width="215dp"
-                android:layout_height="99dp"
+                android:layout_width="219dp"
+                android:layout_height="152dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginEnd="33dp"
-                android:layout_marginBottom="53dp" />
+                android:layout_marginEnd="29dp"
+                android:layout_marginBottom="0dp" />
 
             <Button
                 android:id="@+id/button_test"
@@ -205,6 +206,6 @@
                 android:textSize="12dp" />
 
 
-        </RelativeLayout>
+        </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

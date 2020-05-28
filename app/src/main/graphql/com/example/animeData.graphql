@@ -23,6 +23,12 @@ query animeData($id: Int) {
             english
             native
         }
+        genres
+        averageScore
+        rankings {
+            rank
+        }
+        description
         startDate {
             year
             month
@@ -33,7 +39,7 @@ query animeData($id: Int) {
         }
         seasonYear
         coverImage {
-            large
+            extraLarge
         }
     }
 }

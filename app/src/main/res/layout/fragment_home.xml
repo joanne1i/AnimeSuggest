@@ -1,579 +1,591 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:fillViewport="true"
         android:scrollbars="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:context=".HomeFragment"
     >
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/backgroundColor"
+        tools:context="com.example.animesuggest.HomeFragment">
+
+        <!-- Popular this season -->
+        <RelativeLayout
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:weightSum="11"
-            android:background="@color/backgroundColor"
-            tools:context="com.example.animesuggest.HomeFragment">
+            android:layout_height="wrap_content">
 
-            <!-- Popular this season -->
-            <RelativeLayout
-                android:layout_weight="0.5"
-                android:layout_marginTop="50dp"
-                android:layout_marginLeft="15dp"
-                android:layout_width="410dp"
-                android:layout_height="0dp">
+            <TextView
+                android:id="@+id/popular_viewALL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="@string/view_all"
+                android:layout_marginTop="5dp">
 
-                <TextView
-                    android:id="@+id/popular_viewALL"
+            </TextView>
+
+            <TextView
+                android:id="@+id/textPOPULAR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/popular_this_season"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                />
+
+        </RelativeLayout>
+        <GridLayout
+            android:columnCount="3"
+            android:rowCount="1"
+            android:layout_marginTop="20dp"
+            android:alignmentMode="alignMargins"
+            android:columnOrderPreserved="false"
+            android:layout_weight="5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp">
+
+            <!-- Row 1  -->
+            <!-- Column 1-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="2"
+                android:layout_columnWeight="1"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardBackgroundColor="@color/backgroundColor"
+                >
+                <LinearLayout
+                    android:layout_marginTop="0dp"
+                    android:layout_margin="0dp"
+                    android:orientation="vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="@string/view_all"
-                    android:layout_marginTop="5dp">
+                    >
 
-                </TextView>
+                    <ImageView
+                        android:id="@+id/kaguya_imgview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:maxWidth="150dp"
+                        android:maxHeight="170dp"
+                        android:minWidth="150dp"
+                        android:minHeight="170dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/kaguya"
+                        />
 
-                <TextView
-                    android:id="@+id/textPOPULAR"
+
+                    <TextView
+                        android:text="Kaguya-sama wa Kokurasetai? ..."
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:minWidth="150dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="13dp" />
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+            <!-- Column 2-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="2"
+                android:layout_columnWeight="1"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardBackgroundColor="@color/backgroundColor"
+                >
+                <LinearLayout
+                    android:layout_marginTop="0dp"
+                    android:layout_margin="0dp"
+                    android:orientation="vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/popular_this_season"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    />
-
-            </RelativeLayout>
-            <GridLayout
-                android:columnCount="3"
-                android:rowCount="1"
-                android:layout_marginTop="20dp"
-                android:alignmentMode="alignMargins"
-                android:columnOrderPreserved="false"
-                android:layout_weight="5"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:paddingLeft="5dp">
-
-                <!-- Row 1  -->
-                <!-- Column 1-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_rowWeight="2"
-                    android:layout_columnWeight="1"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="0dp"
-                    app:cardPreventCornerOverlap="false"
-                    app:cardBackgroundColor="@color/backgroundColor"
                     >
-                    <LinearLayout
-                        android:layout_marginTop="0dp"
-                        android:layout_margin="0dp"
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
+
+                    <ImageView
+                        android:id="@+id/tog_imgview"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        >
-
-                        <ImageView
-                            android:id="@+id/kaguya_imgview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:maxWidth="150dp"
-                            android:maxHeight="170dp"
-                            android:minWidth="150dp"
-                            android:minHeight="170dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/kaguya"
-                            />
+                        android:adjustViewBounds="true"
+                        android:maxWidth="150dp"
+                        android:maxHeight="170dp"
+                        android:minWidth="150dp"
+                        android:minHeight="170dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/towerofgod"
+                        />
 
 
-                        <TextView
-                            android:text="Kaguya-sama wa Kokurasetai? ..."
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:minWidth="150dp"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/cardview_dark_background"
-                            android:textSize="13dp" />
-
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-                <!-- Column 2-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_rowWeight="2"
-                    android:layout_columnWeight="1"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="0dp"
-                    app:cardPreventCornerOverlap="false"
-                    app:cardBackgroundColor="@color/backgroundColor"
-                    >
-                    <LinearLayout
-                        android:layout_marginTop="0dp"
-                        android:layout_margin="0dp"
-                        android:orientation="vertical"
+                    <TextView
+                        android:text="Kami no Tou: Tower of God"
                         android:layout_width="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:minWidth="150dp"
                         android:layout_height="wrap_content"
-                        >
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="13dp" />
 
-                        <ImageView
-                            android:id="@+id/tog_imgview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:maxWidth="150dp"
-                            android:maxHeight="170dp"
-                            android:minWidth="150dp"
-                            android:minHeight="170dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/towerofgod"
-                            />
+                </LinearLayout>
 
 
-                        <TextView
-                            android:text="Kami no Tou: Tower of God"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:minWidth="150dp"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/cardview_dark_background"
-                            android:textSize="13dp" />
-
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-                <!-- Column 3-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_rowWeight="2"
-                    android:layout_columnWeight="1"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="0dp"
-                    app:cardPreventCornerOverlap="false"
-                    app:cardBackgroundColor="@color/backgroundColor"
-                    >
-                    <LinearLayout
-                        android:layout_marginTop="0dp"
-                        android:layout_margin="0dp"
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        >
-
-                        <ImageView
-                            android:id="@+id/gleipnir_imgview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:maxWidth="150dp"
-                            android:maxHeight="170dp"
-                            android:minWidth="150dp"
-                            android:minHeight="170dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/gleipnir"
-                           />
-
-
-                        <TextView
-                            android:text="Gleipnir"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:minWidth="150dp"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/cardview_dark_background"
-                            android:textSize="13dp" />
-
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-            </GridLayout>
-
-            <!--   Upcoming Next Season     -->
-            <RelativeLayout
-                android:layout_weight="0.5"
-                android:layout_marginTop="50dp"
-                android:layout_marginLeft="15dp"
-                android:layout_width="410dp"
-                android:layout_height="0dp">
-
-
-                <TextView
-                    android:id="@+id/upcoming_viewALL"
+            </androidx.cardview.widget.CardView>
+            <!-- Column 3-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="2"
+                android:layout_columnWeight="1"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardBackgroundColor="@color/backgroundColor"
+                >
+                <LinearLayout
+                    android:layout_marginTop="0dp"
+                    android:layout_margin="0dp"
+                    android:orientation="vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="@string/view_all"
-                    android:layout_marginTop="5dp">
-                </TextView>
-
-                <TextView
-                    android:id="@+id/textUPCOMING"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/upcoming_next_season"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    />
-
-            </RelativeLayout>
-            <GridLayout
-                android:columnCount="3"
-                android:rowCount="1"
-                android:layout_marginTop="20dp"
-                android:alignmentMode="alignMargins"
-                android:columnOrderPreserved="false"
-                android:layout_weight="5"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:paddingLeft="5dp">
-
-                <!-- Row 2  -->
-                <!-- Column 1-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_rowWeight="2"
-                    android:layout_columnWeight="1"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="0dp"
-                    app:cardPreventCornerOverlap="false"
-                    app:cardBackgroundColor="@color/backgroundColor"
                     >
-                    <LinearLayout
-                        android:layout_marginTop="0dp"
-                        android:layout_margin="0dp"
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
+
+                    <ImageView
+                        android:id="@+id/gleipnir_imgview"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        >
-
-                        <ImageView
-                            android:id="@+id/rezero_imgview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:maxWidth="150dp"
-                            android:maxHeight="170dp"
-                            android:minWidth="150dp"
-                            android:minHeight="170dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/rezero"
-                            />
+                        android:adjustViewBounds="true"
+                        android:maxWidth="150dp"
+                        android:maxHeight="170dp"
+                        android:minWidth="150dp"
+                        android:minHeight="170dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/gleipnir"
+                        />
 
 
-                        <TextView
-                            android:text="Re:Zero kara Hajimeru Isekai ..."
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:minWidth="150dp"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/cardview_dark_background"
-                            android:textSize="13dp" />
-
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-                <!-- Column 2-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_rowWeight="2"
-                    android:layout_columnWeight="1"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="0dp"
-                    app:cardPreventCornerOverlap="false"
-                    app:cardBackgroundColor="@color/backgroundColor"
-                    >
-                    <LinearLayout
-                        android:layout_marginTop="0dp"
-                        android:layout_margin="0dp"
-                        android:orientation="vertical"
+                    <TextView
+                        android:text="Gleipnir"
                         android:layout_width="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:minWidth="150dp"
                         android:layout_height="wrap_content"
-                        >
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="13dp" />
 
-                        <ImageView
-                            android:id="@+id/comedylove_imgview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:maxWidth="150dp"
-                            android:maxHeight="170dp"
-                            android:minWidth="150dp"
-                            android:minHeight="170dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/comedylove"
-                            />
+                </LinearLayout>
 
 
-                        <TextView
-                            android:text="Yahari Ore no Seishun Love ..."
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:minWidth="150dp"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/cardview_dark_background"
-                            android:textSize="13dp" />
+            </androidx.cardview.widget.CardView>
+        </GridLayout>
 
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-                <!-- Column 3-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_rowWeight="2"
-                    android:layout_columnWeight="1"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="0dp"
-                    app:cardPreventCornerOverlap="false"
-                    app:cardBackgroundColor="@color/backgroundColor"
-                    >
-                    <LinearLayout
-                        android:layout_marginTop="0dp"
-                        android:layout_margin="0dp"
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        >
-
-                        <ImageView
-                            android:id="@+id/alicization_imgview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:maxWidth="150dp"
-                            android:maxHeight="170dp"
-                            android:minWidth="150dp"
-                            android:minHeight="170dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/alicization"
-                            />
-
-
-                        <TextView
-                            android:text="Sword Art Online: Alicization - War ..."
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:minWidth="150dp"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/cardview_dark_background"
-                            android:textSize="13dp" />
-
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-            </GridLayout>
-
-            <!--   All time popular     -->
-            <RelativeLayout
-                android:layout_weight="0.5"
-                android:layout_marginTop="50dp"
-                android:layout_marginLeft="15dp"
-                android:layout_width="410dp"
-                android:layout_height="0dp">
-
-                <TextView
-                    android:id="@+id/alltime_viewALL"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="@string/view_all"
-                    android:layout_marginTop="5dp">
-                </TextView>
+        <!--   Upcoming Next Season     -->
+        <RelativeLayout
+            android:layout_weight="0.5"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
 
             <TextView
-                    android:id="@+id/textALLTIMEPOPULAR"
+                android:id="@+id/upcoming_viewALL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="@string/view_all"
+                android:layout_marginTop="5dp"
+                android:paddingRight="10dp">
+            </TextView>
+
+            <TextView
+                android:id="@+id/textUPCOMING"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/upcoming_next_season"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                />
+
+        </RelativeLayout>
+        <GridLayout
+            android:columnCount="3"
+            android:rowCount="1"
+            android:layout_marginTop="20dp"
+            android:alignmentMode="alignMargins"
+            android:columnOrderPreserved="false"
+            android:layout_weight="5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp">
+
+            <!-- Row 2  -->
+            <!-- Column 1-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="2"
+                android:layout_columnWeight="1"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardBackgroundColor="@color/backgroundColor"
+                >
+                <LinearLayout
+                    android:layout_marginTop="0dp"
+                    android:layout_margin="0dp"
+                    android:orientation="vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/all_time_popular"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    />
-
-            </RelativeLayout>
-            <GridLayout
-                android:columnCount="3"
-                android:rowCount="1"
-                android:layout_marginTop="20dp"
-                android:alignmentMode="alignMargins"
-                android:columnOrderPreserved="false"
-                android:layout_weight="5"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:paddingLeft="5dp">
-
-                <!-- Row 3  -->
-                <!-- Column 1-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_rowWeight="2"
-                    android:layout_columnWeight="1"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="0dp"
-                    app:cardPreventCornerOverlap="false"
-                    app:cardBackgroundColor="@color/backgroundColor"
                     >
-                    <LinearLayout
-                        android:layout_marginTop="0dp"
-                        android:layout_margin="0dp"
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
+
+                    <ImageView
+                        android:id="@+id/rezero_imgview"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        >
-
-                        <ImageView
-                            android:id="@+id/aot_imgview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:maxWidth="150dp"
-                            android:maxHeight="170dp"
-                            android:minWidth="150dp"
-                            android:minHeight="170dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/attackontitan"
-                            />
+                        android:adjustViewBounds="true"
+                        android:maxWidth="150dp"
+                        android:maxHeight="170dp"
+                        android:minWidth="150dp"
+                        android:minHeight="170dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/rezero"
+                        />
 
 
-                        <TextView
-                            android:text="Shingeki no Kyojin"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:minWidth="150dp"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/cardview_dark_background"
-                            android:textSize="13dp" />
+                    <TextView
+                        android:text="Re:Zero kara Hajimeru Isekai ..."
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:minWidth="150dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="13dp" />
 
-                    </LinearLayout>
+                </LinearLayout>
 
 
-                </androidx.cardview.widget.CardView>
-                <!-- Column 2-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_rowWeight="2"
-                    android:layout_columnWeight="1"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="0dp"
-                    app:cardPreventCornerOverlap="false"
-                    app:cardBackgroundColor="@color/backgroundColor"
+            </androidx.cardview.widget.CardView>
+            <!-- Column 2-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="2"
+                android:layout_columnWeight="1"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardBackgroundColor="@color/backgroundColor"
+                >
+                <LinearLayout
+                    android:layout_marginTop="0dp"
+                    android:layout_margin="0dp"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     >
-                    <LinearLayout
-                        android:layout_marginTop="0dp"
-                        android:layout_margin="0dp"
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
+
+                    <ImageView
+                        android:id="@+id/comedylove_imgview"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        >
-
-                        <ImageView
-                            android:id="@+id/sao_imgview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:maxWidth="150dp"
-                            android:maxHeight="170dp"
-                            android:minWidth="150dp"
-                            android:minHeight="170dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/swordart"
-                            />
+                        android:adjustViewBounds="true"
+                        android:maxWidth="150dp"
+                        android:maxHeight="170dp"
+                        android:minWidth="150dp"
+                        android:minHeight="170dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/comedylove"
+                        />
 
 
-                        <TextView
-                            android:text="Sword Art Online"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:minWidth="150dp"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/cardview_dark_background"
-                            android:textSize="13dp" />
+                    <TextView
+                        android:text="Yahari Ore no Seishun Love ..."
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:minWidth="150dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="13dp" />
 
-                    </LinearLayout>
+                </LinearLayout>
 
 
-                </androidx.cardview.widget.CardView>
-                <!-- Column 3-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_rowWeight="2"
-                    android:layout_columnWeight="1"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="0dp"
-                    app:cardPreventCornerOverlap="false"
-                    app:cardBackgroundColor="@color/backgroundColor"
+            </androidx.cardview.widget.CardView>
+            <!-- Column 3-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="2"
+                android:layout_columnWeight="1"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardBackgroundColor="@color/backgroundColor"
+                >
+                <LinearLayout
+                    android:layout_marginTop="0dp"
+                    android:layout_margin="0dp"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     >
-                    <LinearLayout
-                        android:layout_marginTop="0dp"
-                        android:layout_margin="0dp"
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
+
+                    <ImageView
+                        android:id="@+id/alicization_imgview"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        >
-
-                        <ImageView
-                            android:id="@+id/deathnote_imgview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:maxWidth="150dp"
-                            android:maxHeight="170dp"
-                            android:minWidth="150dp"
-                            android:minHeight="170dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/deathnote"
-                            />
+                        android:adjustViewBounds="true"
+                        android:maxWidth="150dp"
+                        android:maxHeight="170dp"
+                        android:minWidth="150dp"
+                        android:minHeight="170dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/alicization"
+                        />
 
 
-                        <TextView
-                            android:text="Death Note"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:minWidth="150dp"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/cardview_dark_background"
-                            android:textSize="13dp" />
+                    <TextView
+                        android:text="Sword Art Online: Alicization - War ..."
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:minWidth="150dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="13dp" />
 
-                    </LinearLayout>
+                </LinearLayout>
 
 
-                </androidx.cardview.widget.CardView>
-            </GridLayout>
+            </androidx.cardview.widget.CardView>
+        </GridLayout>
 
-        </LinearLayout>
+        <!--   All time popular     -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="50dp"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:id="@+id/alltime_viewALL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="5dp"
+                android:text="@string/view_all"
+                android:paddingRight="10dp"></TextView>
+
+
+            <TextView
+                android:id="@+id/textALLTIMEPOPULAR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/all_time_popular"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+        <GridLayout
+            android:columnCount="3"
+            android:rowCount="1"
+            android:layout_marginTop="20dp"
+            android:alignmentMode="alignMargins"
+            android:columnOrderPreserved="false"
+            android:layout_weight="5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingBottom="20dp">
+
+            <!-- Row 3  -->
+            <!-- Column 1-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="2"
+                android:layout_columnWeight="1"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardBackgroundColor="@color/backgroundColor"
+                >
+                <LinearLayout
+                    android:layout_marginTop="0dp"
+                    android:layout_margin="0dp"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <ImageView
+                        android:id="@+id/aot_imgview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:maxWidth="150dp"
+                        android:maxHeight="170dp"
+                        android:minWidth="150dp"
+                        android:minHeight="170dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/attackontitan"
+                        />
+
+
+                    <TextView
+                        android:text="Shingeki no Kyojin"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:minWidth="150dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="13dp" />
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+            <!-- Column 2-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="2"
+                android:layout_columnWeight="1"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardBackgroundColor="@color/backgroundColor"
+                >
+                <LinearLayout
+                    android:layout_marginTop="0dp"
+                    android:layout_margin="0dp"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <ImageView
+                        android:id="@+id/sao_imgview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:maxWidth="150dp"
+                        android:maxHeight="170dp"
+                        android:minWidth="150dp"
+                        android:minHeight="170dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/swordart"
+                        />
+
+
+                    <TextView
+                        android:text="Sword Art Online"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:minWidth="150dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="13dp" />
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+            <!-- Column 3-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="2"
+                android:layout_columnWeight="1"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardBackgroundColor="@color/backgroundColor"
+                >
+                <LinearLayout
+                    android:layout_marginTop="0dp"
+                    android:layout_margin="0dp"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <ImageView
+                        android:id="@+id/deathnote_imgview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:maxWidth="150dp"
+                        android:maxHeight="170dp"
+                        android:minWidth="150dp"
+                        android:minHeight="170dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/deathnote"
+                        />
+
+
+                    <TextView
+                        android:text="Death Note"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:minWidth="150dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="13dp" />
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+        </GridLayout>
+
+    </LinearLayout>
+
     </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

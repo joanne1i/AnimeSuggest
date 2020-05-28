@@ -11,4 +11,12 @@
     <string name="upcoming_next_season">UPCOMING NEXT SEASON</string>
     <string name="all_time_popular">ALL TIME POPULAR</string>
     <string name="view_all">View All</string>
+    <string name="japanese">JAPANESE</string>
+    <string name="genre">GENRE</string>
+    <string name="description">DESCRIPTION</string>
+    <string name="air_date">AIR DATE</string>
+    <string name="score">SCORE</string>
+    <string name="rank">RANK</string>
+    <string name="end_date">END DATE</string>
+
 </resources>

@@ -1,5 +1,6 @@
 package com.example.animesuggest;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.apollographql.apollo.ApolloCall;
 import com.apollographql.apollo.ApolloClient;
@@ -34,11 +37,7 @@ import org.w3c.dom.Text;
 import okhttp3.OkHttpClient;
 
 public class HomeFragment extends Fragment {
-//    TextView myTextView;
-    ImageView myImageView;
-    LinearLayout layout;
-    Thread thread;
-    int i = 0;
+    ImageView kaguya;
 
     @Nullable
     @Override
@@ -46,62 +45,16 @@ public class HomeFragment extends Fragment {
         // show the current/popular shows
 //        return inflater.inflate(R.layout.fragment_home, container, false);
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        Logger.addLogAdapter(new AndroidLogAdapter());
-        layout = (LinearLayout) view.findViewById(R.id.scrollView);
-        OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
-        GridLayout gridLayout = new GridLayout(getContext());
-        TextView tv = new TextView(getContext());
-//        tv.setLayoutParams(lparams);
-        ApolloClient apolloClient = ApolloClient.builder()
-                .serverUrl("https://graphql.anilist.co")
-                .okHttpClient(okHttpClient)
-                .build();
-//        Button button = (Button)view.findViewById(R.id.btn_press);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d("123test", "plz");
-            apolloClient.query(
-                        SeasonalQuery.builder()
-                                .perPage(5)
-                                .build()
-                ).enqueue(new ApolloCall.Callback<SeasonalQuery.Data>() {
-                    @Override
-                    public void onResponse(@NotNull Response<SeasonalQuery.Data> response) {
-                        String data = "";
-//                        myTextView = (TextView)getView().findViewById(R.id.text_box);
-//                        myImageView = (ImageView)getView().findViewById(R.id.animeImage);
-                            data = response.getData().Page().media().get(i).title().romaji() + '\n' + response.getData().Page().media().get(1).title().native_();
-                            tv.setText(data);
-//                        Handler uiHandler = new Handler(Looper.getMainLooper());
-//                        uiHandler.post(new Runnable(){
-//                            @Override
-//                            public void run() {
-//                                Picasso.get()
-//                                        .load(response.getData().Page().media().get(0).coverImage().large())
-//                                        .into(myImageView);
-//                            }
-//                        });
-                            Logger.d(response.getData().toString());
-//                            new Handler(Looper.getMainLooper()).post(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    if(tv.getParent() != null) {
-//                                        ((ViewGroup)tv.getParent()).removeView(tv); // <- fix
-//                                    }
-//                                    layout.addView(tv);
-//                                }
-//                            });
-//                            i++;
-
-                    }
-                    @Override
-                    public void onFailure(@NotNull ApolloException e) {
-                        Logger.d(e.getLocalizedMessage(), "error");
-                    }
-                });
-//            }
-//        });
+        ((ImageView) view.findViewById(R.id.kaguya_imgview)).setOnClickListener(this::onClick);
         return view;
+    }
+    public void onClick(View view) {
+        AnimePageFragment animePageFragment = new AnimePageFragment();
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, animePageFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
     }
 }

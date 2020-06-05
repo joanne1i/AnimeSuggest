@@ -5,17 +5,17 @@
 
     <item
         android:id="@+id/home_button"
-        android:icon="@drawable/baseline_home_black_18dp"
+        android:icon="@drawable/baseline_home_black_48"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/search_button"
-        android:icon="@drawable/baseline_search_black_18dp"
+        android:icon="@drawable/baseline_search_black_48dp"
         android:title="@string/title_search" />
 
     <item
         android:id="@+id/favorite_button"
-        android:icon="@drawable/baseline_favorite_black_18dp"
-        android:title="@string/title_favorites" />
+        android:icon="@drawable/dice_icon"
+        android:title="@string/title_random" />
 
 </menu>

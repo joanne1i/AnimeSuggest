@@ -1,20 +1,3 @@
-query seasonal($perPage: Int) {
-    Page(perPage: $perPage, page: 1) {
-        media(season: SPRING, seasonYear: 2020, type: ANIME) {
-            id
-            season
-            seasonYear
-            title {
-                romaji
-                native
-            }
-            coverImage {
-                large
-            }
-        }
-    }
-}
-
 query animeData($id: Int) {
     Media(id: $id, type: ANIME) {
         id
@@ -40,6 +23,72 @@ query animeData($id: Int) {
         seasonYear
         coverImage {
             extraLarge
+        }
+    }
+}
+
+query seasonal {
+    Page (page: 1){
+        pageInfo {
+            total
+        }
+        media(season: SPRING, seasonYear: 2020, type: ANIME) {
+            id
+            title {
+                romaji
+                native
+            }
+            genres
+            averageScore
+            rankings {
+                rank
+            }
+            description
+            startDate {
+                year
+                month
+            }
+            endDate {
+                year
+                month
+            }
+            seasonYear
+            coverImage {
+                extraLarge
+            }
+        }
+    }
+}
+
+query seasonalpagetwo($page: Int) {
+    Page (page: $page){
+        pageInfo {
+            total
+        }
+        media(season: SPRING, seasonYear: 2020, type: ANIME, isAdult: false) {
+            id
+            title {
+                romaji
+                native
+            }
+            genres
+            averageScore
+            rankings {
+                rank
+            }
+            description
+            startDate {
+                year
+                month
+            }
+            endDate {
+                year
+                month
+            }
+            seasonYear
+            coverImage {
+                extraLarge
+            }
         }
     }
 }

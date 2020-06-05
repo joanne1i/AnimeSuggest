@@ -24,7 +24,6 @@ import com.apollographql.apollo.ApolloClient;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
 import com.example.AnimeDataQuery;
-import com.example.SeasonalQuery;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
@@ -86,17 +85,26 @@ public class AnimePageFragment extends Fragment {
                         score = (TextView) getView().findViewById(R.id.scoredisplay);
                         coverImage = (ImageView)getView().findViewById(R.id.displaypic);
 
+                        // romanji title
                         data = response.getData().Media().title().romaji();
                         romanji.setText(data);
 
+                        // japanese title
                         data = response.getData().Media().title().native_();
                         japanese.setText(data);
 
-                        data = response.getData().Media().description().replace("<i>", "");
-                        data = data.replace("</i>", "");
-                        data = data.replace("<br>", "");
-                        description.setText(data);
+                        // description
+                        if(response.getData().Media().description() != null) {
+                            data = response.getData().Media().description().replace("<i>", "");
+                            data = data.replace("</i>", "");
+                            data = data.replace("<br>", "");
+                            description.setText(data);
+                        }
+                        else {
+                            description.setText("N/A");
+                        }
 
+                        // genres
                         data = response.getData().Media().genres().toString().replace("[","");
                         data = data.replace("]", "");
                         genres.setText(data);
@@ -118,8 +126,13 @@ public class AnimePageFragment extends Fragment {
                         }
 
                         // rank
-                        data = "#" + response.getData().Media().rankings().get(0).rank();
-                        rank.setText(data);
+                        if((response.getData().Media().rankings().isEmpty())) {
+                            rank.setText("N/A");
+                        }
+                        else {
+                            data = "#" + response.getData().Media().rankings().get(0).rank();
+                            rank.setText(data);
+                        }
 
                         // average score
                         if(response.getData().Media().averageScore() != null) {

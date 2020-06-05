@@ -63,14 +63,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         ((ImageView) view.findViewById(R.id.deathnote_imgview)).setOnClickListener(this::onClick);
 
-        ((TextView) view.findViewById(R.id.popular_viewALL)).setOnClickListener(this::onClick);
-
-        ((TextView) view.findViewById(R.id.upcoming_viewALL)).setOnClickListener(this::onClick);
-
-        ((TextView) view.findViewById(R.id.alltime_viewALL)).setOnClickListener(this::onClick);
+        ((TextView) view.findViewById(R.id.popular_viewALL)).setOnClickListener(this::onClick2);
+//
+//        ((TextView) view.findViewById(R.id.upcoming_viewALL)).setOnClickListener(this::onClick2);
+//
+//        ((TextView) view.findViewById(R.id.alltime_viewALL)).setOnClickListener(this::onClick2);
 
         return view;
     }
+
+    // on click listener for home fragment anime cards
     public void onClick(View view) {
         Bundle bundle = new Bundle();
         switch(view.getId()) {
@@ -101,21 +103,34 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             case R.id.deathnote_imgview:
                 bundle.putInt("id", 1535);
                 break;
-            case R.id.popular_viewALL:
-                Log.d("123MESS", "popularviewall");
-                break;
-            case R.id.upcoming_viewALL:
-                Log.d("123MESS", "upcomingviewall");
-                break;
-            case R.id.alltime_viewALL:
-                Log.d("123MESS", "alltimeviewall");
-                break;
         }
         AnimePageFragment animePageFragment = new AnimePageFragment();
         animePageFragment.setArguments(bundle);
         getParentFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, animePageFragment)
+                .commit();
+    }
+
+    // onclick listener for popular this season page
+    public void onClick2(View view) {
+        Bundle bundle = new Bundle();
+        switch(view.getId()) {
+            case R.id.popular_viewALL:
+                    Log.d("123MESS", "popularviewall");
+                    break;
+//                    case R.id.upcoming_viewALL:
+//                    Log.d("123MESS", "upcomingviewall");
+//                    break;
+//                    case R.id.alltime_viewALL:
+//                    Log.d("123MESS", "alltimeviewall");
+//                    break;
+        }
+        PopularThisSeasonFragment popularPageFragment = new PopularThisSeasonFragment();
+        popularPageFragment.setArguments(bundle);
+        getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, popularPageFragment)
                 .commit();
     }
 

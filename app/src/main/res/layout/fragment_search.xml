@@ -1,33 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/relative_layout"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
+    android:background="@color/backgroundColor"
     >
 
-    <TextView
-        android:id="@+id/searchText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/title_search"
-        android:textStyle="bold"
-        android:layout_marginTop="40dp"
-        android:textSize="30sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
-    <SearchView
-        android:id="@+id/searchBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="90dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/rounded_corners"
-        app:queryHint="@string/search_hint"
-        android:queryHint="@string/search_hint"
-        android:queryBackground="@android:color/transparent"
-        />
-</RelativeLayout>
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".SearchFragment">
+
+        <LinearLayout
+            android:id="@+id/linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="130dp"
+            android:layout_marginLeft="10dp"
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_search_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="200dp"
+                android:layout_gravity="center|center_vertical"
+                android:layout_margin="0dp">
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/searchText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-420dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/title_search"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <SearchView
+                android:id="@+id/searchBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-110dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/rounded_corners"
+                android:queryBackground="@android:color/transparent"
+                android:queryHint="@string/search_hint"
+                app:queryHint="@string/search_hint"
+              />
+
+        </LinearLayout>
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

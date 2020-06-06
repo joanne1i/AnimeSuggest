@@ -85,7 +85,7 @@ public class AllTimePopularFragment extends Fragment {
             public void onResponse(@NotNull Response<AllTimeAnimeQuery.Data> response) {
                 for (int i = PAGEMAX - 1; i >= 0; i--) {
                     id = response.getData().Page().media().get(i).id();
-                    bundle.putInt("id", id);
+//                    bundle.putInt("id", id);
                     title = response.getData().Page().media().get(i).title().romaji();
                     imgurl = response.getData().Page().media().get(i).coverImage().extraLarge();
                     mlist.add(new AnimeCard(id, title, imgurl));
@@ -135,7 +135,7 @@ public class AllTimePopularFragment extends Fragment {
             public void onResponse(@NotNull Response<AllTimeAnimeQuery.Data> response) {
                 for (int i = PAGEMAX - 1; i >= 0; i--) {
                     id = response.getData().Page().media().get(i).id();
-                    bundle.putInt("id", id);
+//                    bundle.putInt("id", id);
                     title = response.getData().Page().media().get(i).title().romaji();
                     imgurl = response.getData().Page().media().get(i).coverImage().extraLarge();
                     mlist.add(new AnimeCard(id, title, imgurl));
@@ -185,7 +185,7 @@ public class AllTimePopularFragment extends Fragment {
             public void onResponse(@NotNull Response<AllTimeAnimeQuery.Data> response) {
                 for (int i = PAGEMAX - 1; i >= 0; i--) {
                     id = response.getData().Page().media().get(i).id();
-                    bundle.putInt("id", id);
+//                    bundle.putInt("id", id);
                     title = response.getData().Page().media().get(i).title().romaji();
                     imgurl = response.getData().Page().media().get(i).coverImage().extraLarge();
                     mlist.add(new AnimeCard(id, title, imgurl));
@@ -234,18 +234,18 @@ public class AllTimePopularFragment extends Fragment {
             public void onResponse(@NotNull Response<AllTimeAnimeQuery.Data> response) {
                 for (int i = PAGEMAX - 1; i >= 0; i--) {
                     id = response.getData().Page().media().get(i).id();
-                    bundle.putInt("id", id);
+//                    bundle.putInt("id", id);
                     title = response.getData().Page().media().get(i).title().romaji();
                     imgurl = response.getData().Page().media().get(i).coverImage().extraLarge();
                     mlist.add(new AnimeCard(id, title, imgurl));
                 }
 
+                Collections.reverse(mlist);
                 // have to move the portion of the background task that updates the UI onto the main thread
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         // Stuff that updates the UI
-                        Collections.reverse(mlist);
                         adapter = new AnimeCardAdapter(mlist, getActivity(), new AnimeCardAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClicked(int position, Object object) {

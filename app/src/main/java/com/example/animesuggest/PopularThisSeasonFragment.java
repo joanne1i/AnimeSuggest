@@ -30,6 +30,7 @@ import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
 
 import com.example.SeasonalpagetwoQuery;
+
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
@@ -47,6 +48,8 @@ import okhttp3.OkHttpClient;
 public class PopularThisSeasonFragment extends Fragment {
 
     private static List<AnimeCard> mlist = new ArrayList<>();
+
+
     String title;
     String imgurl;
     int id;
@@ -75,7 +78,6 @@ public class PopularThisSeasonFragment extends Fragment {
                 .okHttpClient(okHttpClient)
                 .build();
 
-
         apolloClient.query(
                 SeasonalpagetwoQuery.builder()
                         .page(2)
@@ -91,7 +93,7 @@ public class PopularThisSeasonFragment extends Fragment {
                     imgurl = response.getData().Page().media().get(i).coverImage().extraLarge();
                     mlist.add(new AnimeCard(id, title, imgurl));
                 }
-                Collections.reverse(mlist);
+//                Collections.reverse(mlist);
 
             }
 
@@ -116,13 +118,12 @@ public class PopularThisSeasonFragment extends Fragment {
                     imgurl = response.getData().Page().media().get(i).coverImage().extraLarge();
                     mlist.add(new AnimeCard(id, title, imgurl));
                 }
-
+                Collections.reverse(mlist);
                 // have to move the portion of the background task that updates the UI onto the main thread
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         // Stuff that updates the UI
-                        Collections.reverse(mlist);
                         adapter = new AnimeCardAdapter(mlist, getActivity(), new AnimeCardAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClicked(int position, Object object) {

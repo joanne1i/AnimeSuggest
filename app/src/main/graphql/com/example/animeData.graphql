@@ -157,3 +157,37 @@ query allTimeAnime($page: Int) {
         }
     }
 }
+
+query searchgenre($genre: String) {
+    Page{
+        pageInfo {
+            total
+        }
+        media(type: ANIME, isAdult: false, sort: [POPULARITY_DESC], genre: $genre) {
+            id
+            title {
+                romaji
+                native
+            }
+            genres
+            averageScore
+            rankings {
+                rank
+            }
+            description
+            startDate {
+                year
+                month
+            }
+            endDate {
+                year
+                month
+            }
+            seasonYear
+            coverImage {
+                extraLarge
+            }
+        }
+    }
+}
+

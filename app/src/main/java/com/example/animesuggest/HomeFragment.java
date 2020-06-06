@@ -26,7 +26,7 @@ import com.apollographql.apollo.ApolloCall;
 import com.apollographql.apollo.ApolloClient;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
-import com.example.SeasonalQuery;
+
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
@@ -64,10 +64,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         ((ImageView) view.findViewById(R.id.deathnote_imgview)).setOnClickListener(this::onClick);
 
         ((TextView) view.findViewById(R.id.popular_viewALL)).setOnClickListener(this::onClick2);
-//
-//        ((TextView) view.findViewById(R.id.upcoming_viewALL)).setOnClickListener(this::onClick2);
-//
-//        ((TextView) view.findViewById(R.id.alltime_viewALL)).setOnClickListener(this::onClick2);
+
+        ((TextView) view.findViewById(R.id.upcoming_viewALL)).setOnClickListener(this::onClick3);
+
+        ((TextView) view.findViewById(R.id.alltime_viewALL)).setOnClickListener(this::onClick4);
 
         return view;
     }
@@ -109,28 +109,44 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         getParentFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, animePageFragment)
+                .addToBackStack("tag")
                 .commit();
     }
 
     // onclick listener for popular this season page
     public void onClick2(View view) {
         Bundle bundle = new Bundle();
-        switch(view.getId()) {
-            case R.id.popular_viewALL:
-                    Log.d("123MESS", "popularviewall");
-                    break;
-//                    case R.id.upcoming_viewALL:
-//                    Log.d("123MESS", "upcomingviewall");
-//                    break;
-//                    case R.id.alltime_viewALL:
-//                    Log.d("123MESS", "alltimeviewall");
-//                    break;
-        }
         PopularThisSeasonFragment popularPageFragment = new PopularThisSeasonFragment();
         popularPageFragment.setArguments(bundle);
         getParentFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, popularPageFragment)
+                .addToBackStack("tag")
+                .commit();
+    }
+
+
+    // onclick listener for upcoming next season page
+    public void onClick3(View view) {
+        Bundle bundle = new Bundle();
+        UpcomingNextSeasonFragment upcomingNextSeasonPage = new UpcomingNextSeasonFragment();
+        upcomingNextSeasonPage.setArguments(bundle);
+        getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, upcomingNextSeasonPage)
+                .addToBackStack("tag")
+                .commit();
+    }
+
+    // onclick listener for all time popular page
+    public void onClick4(View view) {
+        Bundle bundle = new Bundle();
+        AllTimePopularFragment alltimePage = new AllTimePopularFragment();
+        alltimePage.setArguments(bundle);
+        getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, alltimePage)
+                .addToBackStack("tag")
                 .commit();
     }
 

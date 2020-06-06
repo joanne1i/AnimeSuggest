@@ -1,5 +1,6 @@
 package com.example.animesuggest;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
@@ -30,6 +31,7 @@ public class AnimeCardAdapter extends RecyclerView.Adapter<AnimeCardAdapter.Anim
         void onItemClicked(int position, Object object);
     }
 
+
     public AnimeCardAdapter(List<AnimeCard> list, Context context, OnItemClickListener onItemClickListener) {
         this.list = list;
         this.context = context;
@@ -46,11 +48,9 @@ public class AnimeCardAdapter extends RecyclerView.Adapter<AnimeCardAdapter.Anim
             super(view);
 
             // item layout might not be right?
-            item = (LinearLayout) view.findViewById(R.id.animecard_layout);
+//            item = (LinearLayout) view.findViewById(R.id.animecard_layout);
             coverImage = (ImageView) view.findViewById(R.id.cardview_imgdisplay);
             title = (TextView) view.findViewById(R.id.cardview_txtdisplay);
-
-
         }
     }
 
@@ -64,7 +64,13 @@ public class AnimeCardAdapter extends RecyclerView.Adapter<AnimeCardAdapter.Anim
     @Override
     public void onBindViewHolder(AnimeCardViewHolder viewHolder, final int position) {
         // Update:
-        viewHolder.title.setText(list.get(position).getTitle());
+        if (list.get(position).getTitle() != null) {
+            viewHolder.title.setText(list.get(position).getTitle());
+        }
+        else {
+            viewHolder.title.setText(R.string.unavailabletitle);
+        }
+
         Picasso.get()
                 .load(list.get(position).getImageUrl())
                 .into(viewHolder.coverImage);
@@ -87,75 +93,3 @@ public class AnimeCardAdapter extends RecyclerView.Adapter<AnimeCardAdapter.Anim
         return list.size();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-//public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.AnimeViewHolder> {
-//
-//    private List<AnimeCard> mAnimeCardList;
-//    // not sure if this is the right listener
-//    private RecyclerViewClickListener listener;
-//
-//    public AnimeAdapter(List<AnimeCard> mAnimeCardList, RecyclerViewClickListener listener) {
-//        this.mAnimeCardList = mAnimeCardList;
-//        this.listener = listener;
-//    }
-//
-//    @NonNull
-//    @Override
-//    public AnimeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_anime, parent, false);
-//        return new AnimeViewHolder(view, listener);
-//    }
-//
-////    @Override
-////    public void onBindViewHolder(@NonNull AnimeAdapter.AnimeViewHolder holder, int position) {
-////        AnimeCard animeCard = mAnimeCardList.get(position);
-////        holder.title.setText(animeCard.getTitle());
-////        if(animeCard.getCoverImageURL() != null) {
-////            Picasso.get()
-////                    .load(animeCard.getCoverImageURL())
-////                    .into(holder.coverImg);
-////        }
-////    }
-//
-//    @Override
-//    public int getItemCount() {
-//        return mAnimeCardList.size();
-//    }
-//
-//    // ViewHolder ? made static
-//    public static class AnimeViewHolder extends RecyclerView.ViewHolder {
-//
-//        TextView title;
-//        ImageView coverImg;
-//
-//        public AnimeViewHolder(@NonNull View itemView, final RecyclerViewClickListener listener) {
-//            super(itemView);
-//            title = itemView.findViewById(R.id.cardview_txtdisplay);
-//            coverImg = itemView.findViewById(R.id.cardview_imgdisplay);
-//
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if(listener != null) {
-////                        listener.onRowClicked(getAdapterPosition());
-//                        Log.d("123LISTENER", "listener works");
-//                        listener.onRowClicked(getAdapterPosition());
-//                    }
-//
-//                }
-//            });
-//
-//        }
-//    }
-//}

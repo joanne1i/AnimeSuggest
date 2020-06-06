@@ -19,5 +19,6 @@
     <string name="rank">RANK</string>
     <string name="end_date">END DATE</string>
     <string name="title_random">Random</string>
+    <string name="unavailabletitle">Title Not Available</string>
 
 </resources>

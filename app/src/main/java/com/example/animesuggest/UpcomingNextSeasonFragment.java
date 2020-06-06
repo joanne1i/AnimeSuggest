@@ -28,7 +28,7 @@ import com.apollographql.apollo.ApolloCall;
 import com.apollographql.apollo.ApolloClient;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
-
+import com.example.NextSeasonQuery;
 import com.example.SeasonalpagetwoQuery;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
@@ -39,25 +39,24 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
 
-public class PopularThisSeasonFragment extends Fragment {
+public class UpcomingNextSeasonFragment extends Fragment {
 
     private static List<AnimeCard> mlist = new ArrayList<>();
-    String title;
-    String imgurl;
-    int id;
-    int PAGEMAX = 50;
-    AnimeCardAdapter adapter;
+    private String title;
+    private String imgurl;
+    private int id;
+    private int PAGEMAX = 35;
+    private AnimeCardAdapter adapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_popularseason, container, false);
+        View view = inflater.inflate(R.layout.fragment_nextseason, container, false);
         mlist.clear();
 
         // RecyclerView tings
@@ -75,54 +74,27 @@ public class PopularThisSeasonFragment extends Fragment {
                 .okHttpClient(okHttpClient)
                 .build();
 
-
         apolloClient.query(
-                SeasonalpagetwoQuery.builder()
-                        .page(2)
-                        .build()
-        ).enqueue(new ApolloCall.Callback<SeasonalpagetwoQuery.Data>() {
-            @Override
-            public void onResponse(@NotNull Response<SeasonalpagetwoQuery.Data> response) {
-                int remaining = response.getData().Page().pageInfo().total();
-                for (int i = 0; i < remaining-PAGEMAX; i++) {
-                    id = response.getData().Page().media().get(i).id();
-                    bundle.putInt("id", id);
-                    title = response.getData().Page().media().get(i).title().romaji();
-                    imgurl = response.getData().Page().media().get(i).coverImage().extraLarge();
-                    mlist.add(new AnimeCard(id, title, imgurl));
-                }
-                Collections.reverse(mlist);
-
-            }
-
-            @Override
-            public void onFailure(@NotNull ApolloException e) {
-                Log.d(e.getLocalizedMessage(), "error");
-            }
-        });
-
-        apolloClient.query(
-                SeasonalpagetwoQuery.builder()
+                NextSeasonQuery.builder()
                         .page(1)
                         .build()
-        ).enqueue(new ApolloCall.Callback<SeasonalpagetwoQuery.Data>() {
+        ).enqueue(new ApolloCall.Callback<NextSeasonQuery.Data>() {
             @Override
-            public void onResponse(@NotNull Response<SeasonalpagetwoQuery.Data> response) {
-                Intent intent = new Intent();
-                for (int i = PAGEMAX-1; i >= 0; i--) {
+            public void onResponse(@NotNull Response<NextSeasonQuery.Data> response) {
+                for (int i = 0; i < PAGEMAX; i++) {
                     id = response.getData().Page().media().get(i).id();
                     bundle.putInt("id", id);
                     title = response.getData().Page().media().get(i).title().romaji();
                     imgurl = response.getData().Page().media().get(i).coverImage().extraLarge();
                     mlist.add(new AnimeCard(id, title, imgurl));
                 }
+                Log.d("list_inside", bundle.get("id").toString());
 
                 // have to move the portion of the background task that updates the UI onto the main thread
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         // Stuff that updates the UI
-                        Collections.reverse(mlist);
                         adapter = new AnimeCardAdapter(mlist, getActivity(), new AnimeCardAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClicked(int position, Object object) {
@@ -155,4 +127,3 @@ public class PopularThisSeasonFragment extends Fragment {
         return view;
     }
 }
-

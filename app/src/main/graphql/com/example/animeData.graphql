@@ -27,15 +27,14 @@ query animeData($id: Int) {
     }
 }
 
-query seasonal($page: Int) {
-    Page (page: $page){
-        pageInfo {
-            total
-        }
-        media(season: SPRING, seasonYear: 2020, type: ANIME) {
+
+query randomAnimeData {
+    Page {
+        media(seasonYear: 2019, type: ANIME, isAdult: false) {
             id
             title {
                 romaji
+                english
                 native
             }
             genres
@@ -65,7 +64,73 @@ query seasonalpagetwo($page: Int) {
         pageInfo {
             total
         }
-        media(season: SPRING, seasonYear: 2020, type: ANIME, isAdult: false) {
+        media(season: SPRING, seasonYear: 2020, type: ANIME, isAdult: false, sort: [POPULARITY_DESC]) {
+            id
+            title {
+                romaji
+                native
+            }
+            genres
+            averageScore
+            rankings {
+                rank
+            }
+            description
+            startDate {
+                year
+                month
+            }
+            endDate {
+                year
+                month
+            }
+            seasonYear
+            coverImage {
+                extraLarge
+            }
+        }
+    }
+}
+
+query nextSeason($page: Int) {
+    Page (page: $page){
+        pageInfo {
+            total
+        }
+        media(season: SUMMER, seasonYear: 2020, type: ANIME, isAdult: false, sort: [POPULARITY_DESC]) {
+            id
+            title {
+                romaji
+                native
+            }
+            genres
+            averageScore
+            rankings {
+                rank
+            }
+            description
+            startDate {
+                year
+                month
+            }
+            endDate {
+                year
+                month
+            }
+            seasonYear
+            coverImage {
+                extraLarge
+            }
+        }
+    }
+}
+
+query allTimeAnime($page: Int) {
+    Page (page: $page){
+        pageInfo {
+            total
+        }
+        media(type: ANIME, isAdult: false, sort: [POPULARITY_DESC]) {
             id
             title {
                 romaji

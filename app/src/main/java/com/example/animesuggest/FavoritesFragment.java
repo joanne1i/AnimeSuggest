@@ -14,6 +14,8 @@ import com.apollographql.apollo.ApolloCall;
 import com.apollographql.apollo.ApolloClient;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
+import com.example.AnimeDataQuery;
+import com.example.RandomAnimeDataQuery;
 import com.example.SeasonalpagetwoQuery;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
@@ -30,7 +32,7 @@ public class FavoritesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
 
         Bundle bundle = new Bundle();
-        int random = (int) (Math.random() * 50 + 1);
+        int random = (int) (Math.random() * 50);
         Logger.addLogAdapter(new AndroidLogAdapter());
         OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
         ApolloClient apolloClient = ApolloClient.builder()
@@ -38,12 +40,11 @@ public class FavoritesFragment extends Fragment {
                 .okHttpClient(okHttpClient)
                 .build();
         apolloClient.query(
-                SeasonalpagetwoQuery.builder()
-                        .page(1)
+                RandomAnimeDataQuery.builder()
                         .build()
-        ).enqueue(new ApolloCall.Callback<SeasonalpagetwoQuery.Data>() {
+        ).enqueue(new ApolloCall.Callback<RandomAnimeDataQuery.Data>() {
             @Override
-            public void onResponse(@NotNull Response<SeasonalpagetwoQuery.Data> response) {
+            public void onResponse(@NotNull Response<RandomAnimeDataQuery.Data> response) {
                 int id = response.getData().Page().media().get(random).id();
                 bundle.putInt("id", id);
                 AnimePageFragment animePageFragment = new AnimePageFragment();
@@ -51,6 +52,7 @@ public class FavoritesFragment extends Fragment {
                 getParentFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, animePageFragment)
+                        .addToBackStack("tag")
                         .commit();
 //                Logger.d(response.getData().Page().media().get(random).title());
             }

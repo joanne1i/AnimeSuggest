@@ -27,8 +27,8 @@ query animeData($id: Int) {
     }
 }
 
-query seasonal {
-    Page (page: 1){
+query seasonal($page: Int) {
+    Page (page: $page){
         pageInfo {
             total
         }

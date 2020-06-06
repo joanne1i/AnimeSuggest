@@ -1,8 +1,10 @@
 package com.example.animesuggest;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,14 +24,21 @@ import java.util.List;
 public class AnimeCardAdapter extends RecyclerView.Adapter<AnimeCardAdapter.AnimeCardViewHolder> {
     public List<AnimeCard> list;
     Context context;
+    private OnItemClickListener onItemClickListener;
 
-    public AnimeCardAdapter(List<AnimeCard> list) {
+    public interface OnItemClickListener {
+        void onItemClicked(int position, Object object);
+    }
+
+    public AnimeCardAdapter(List<AnimeCard> list, Context context, OnItemClickListener onItemClickListener) {
         this.list = list;
+        this.context = context;
+        this.onItemClickListener = onItemClickListener;
     }
 
     public static class AnimeCardViewHolder extends RecyclerView.ViewHolder {
         LinearLayout item;
-
+        int id;
         ImageView coverImage;
         TextView title;
 
@@ -38,6 +49,8 @@ public class AnimeCardAdapter extends RecyclerView.Adapter<AnimeCardAdapter.Anim
             item = (LinearLayout) view.findViewById(R.id.animecard_layout);
             coverImage = (ImageView) view.findViewById(R.id.cardview_imgdisplay);
             title = (TextView) view.findViewById(R.id.cardview_txtdisplay);
+
+
         }
     }
 
@@ -51,12 +64,17 @@ public class AnimeCardAdapter extends RecyclerView.Adapter<AnimeCardAdapter.Anim
     @Override
     public void onBindViewHolder(AnimeCardViewHolder viewHolder, final int position) {
         // Update:
-        Uri uri =  Uri.parse(list.get(position).getImageUrl());
-//        viewHolder.coverImage.setImageURI(Uri.parse(list.get(position).getImageUrl()));
         viewHolder.title.setText(list.get(position).getTitle());
         Picasso.get()
                 .load(list.get(position).getImageUrl())
                 .into(viewHolder.coverImage);
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemClickListener.onItemClicked(position, list.get(position));
+            }
+        });
     }
 
     @Override

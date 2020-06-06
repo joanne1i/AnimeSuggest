@@ -1,5 +1,6 @@
 package com.example.animesuggest;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,7 +51,7 @@ public class PopularThisSeasonFragment extends Fragment {
     String title;
     String imgurl;
     int id;
-    final int PAGEMAX = 50;
+    int PAGEMAX = 50;
     AnimeCardAdapter adapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
@@ -72,39 +74,79 @@ public class PopularThisSeasonFragment extends Fragment {
                 .serverUrl("https://graphql.anilist.co")
                 .okHttpClient(okHttpClient)
                 .build();
-            apolloClient.query(
-                    SeasonalpagetwoQuery.builder()
-                            .page(1)
-                            .build()
-            ).enqueue(new ApolloCall.Callback<SeasonalpagetwoQuery.Data>() {
-                @Override
-                public void onResponse(@NotNull Response<SeasonalpagetwoQuery.Data> response) {
-                    for (int i = 0; i < PAGEMAX; i++) {
-                        id = response.getData().Page().media().get(i).id();
-                        bundle.putInt("id", id);
-                        title = response.getData().Page().media().get(i).title().romaji();
-                        imgurl = response.getData().Page().media().get(i).coverImage().extraLarge();
-                        mlist.add(new AnimeCard(id, title, imgurl));
+
+        apolloClient.query(
+                SeasonalpagetwoQuery.builder()
+                        .page(1)
+                        .build()
+        ).enqueue(new ApolloCall.Callback<SeasonalpagetwoQuery.Data>() {
+            @Override
+            public void onResponse(@NotNull Response<SeasonalpagetwoQuery.Data> response) {
+                Intent intent = new Intent();
+                for (int i = 0; i < PAGEMAX; i++) {
+                    id = response.getData().Page().media().get(i).id();
+                    bundle.putInt("id", id);
+                    title = response.getData().Page().media().get(i).title().romaji();
+                    imgurl = response.getData().Page().media().get(i).coverImage().extraLarge();
+                    mlist.add(new AnimeCard(id, title, imgurl));
+                }
+                Log.d("list_inside", mlist.toString());
+
+                // have to move the portion of the background task that updates the UI onto the main thread
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Stuff that updates the UI
+                        adapter = new AnimeCardAdapter(mlist, getActivity(), new AnimeCardAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClicked(int position, Object object) {
+                                Toast.makeText(view.getContext(),"ID: "+id, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        recyclerView.setAdapter(adapter);
                     }
-                    Log.d("list_inside", mlist.toString());
+                });
+            }
 
-                    // have to move the portion of the background task that updates the UI onto the main thread
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            // Stuff that updates the UI
-                            adapter = new AnimeCardAdapter(mlist);
-                            recyclerView.setAdapter(adapter);
-                        }
-                    });
-                }
-                @Override
-                public void onFailure(@NotNull ApolloException e) {
-                    Log.d(e.getLocalizedMessage(), "error");
-                }
-            });
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                Log.d(e.getLocalizedMessage(), "error");
+            }
+        });
 
+//                apolloClient.query(
+//                SeasonalpagetwoQuery.builder()
+//                        .page(2)
+//                        .build()
+//        ).enqueue(new ApolloCall.Callback<SeasonalpagetwoQuery.Data>() {
+//            @Override
+//            public void onResponse(@NotNull Response<SeasonalpagetwoQuery.Data> response) {
+//                int remaining = response.getData().Page().pageInfo().total();
+//                for (int i = 0; i < remaining-PAGEMAX; i++) {
+//                    id = response.getData().Page().media().get(i).id();
+//                    bundle.putInt("id", id);
+//                    title = response.getData().Page().media().get(i).title().romaji();
+//                    imgurl = response.getData().Page().media().get(i).coverImage().extraLarge();
+//                    mlist.add(new AnimeCard(id, title, imgurl));
+//                }
+//                Log.d("list_inside", mlist.toString());
+//
+//                // have to move the portion of the background task that updates the UI onto the main thread
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        // Stuff that updates the UI
+//                        adapter = new AnimeCardAdapter(mlist, getActivity());
+//                        recyclerView.setAdapter(adapter);
+//                    }
+//                });
+//            }
 
+//            @Override
+//            public void onFailure(@NotNull ApolloException e) {
+//                Log.d(e.getLocalizedMessage(), "error");
+//            }
+//        });
 
 
         return view;

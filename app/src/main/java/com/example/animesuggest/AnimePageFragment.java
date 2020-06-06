@@ -155,20 +155,6 @@ public class AnimePageFragment extends Fragment {
                         });
                         Logger.d(response.getData().toString());
 
-//                    }
-//                });
-
-//                            new Handler(Looper.getMainLooper()).post(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    if(tv.getParent() != null) {
-//                                        ((ViewGroup)tv.getParent()).removeView(tv); // <- fix
-//                                    }
-//                                    layout.addView(tv);
-//                                }
-//                            });
-
-
             }
 
             @Override

@@ -34,28 +34,36 @@
         android:layout_height="wrap_content"
         >
 
-        <ImageView
-            android:id="@+id/cardview_imgdisplay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:maxWidth="150dp"
-            android:maxHeight="170dp"
-            android:minWidth="150dp"
-            android:minHeight="170dp"
-            android:scaleType="centerCrop"
-            />
-
-
-        <TextView
-            android:id="@+id/cardview_txtdisplay"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_marginTop="2dp"
-            android:minWidth="150dp"
-            android:singleLine="true"
-            android:layout_height="25dp"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="13dp" />
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/cardview_imgdisplay"
+                android:layout_width="130dp"
+                android:layout_height="160dp"
+                android:adjustViewBounds="true"
+                android:maxWidth="150dp"
+                android:maxHeight="170dp"
+                android:minWidth="150dp"
+                android:minHeight="170dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/cardview_txtdisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:maxHeight="25dp"
+        android:minWidth="150dp"
+        android:minHeight="25dp"
+        android:singleLine="true"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="13dp" />
 
     </LinearLayout>
 

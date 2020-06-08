@@ -52,7 +52,6 @@ public class FavoritesFragment extends Fragment {
                 getParentFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, animePageFragment)
-                        .addToBackStack("tag")
                         .commit();
 //                Logger.d(response.getData().Page().media().get(random).title());
             }

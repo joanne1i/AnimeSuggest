@@ -81,7 +81,8 @@ public class UpcomingNextSeasonFragment extends Fragment {
         ).enqueue(new ApolloCall.Callback<NextSeasonQuery.Data>() {
             @Override
             public void onResponse(@NotNull Response<NextSeasonQuery.Data> response) {
-                for (int i = 0; i < PAGEMAX; i++) {
+                int total = response.getData().Page().pageInfo().total();
+                for (int i = 0; i < total; i++) {
                     id = response.getData().Page().media().get(i).id();
                     bundle.putInt("id", id);
                     title = response.getData().Page().media().get(i).title().romaji();

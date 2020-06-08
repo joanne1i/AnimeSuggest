@@ -191,3 +191,74 @@ query searchgenre($genre: String) {
     }
 }
 
+query getGenres {
+    GenreCollection
+}
+
+query getSearch($genre: String, $search: String) {
+    Page{
+        pageInfo {
+            total
+        }
+        media(type: ANIME, isAdult: false, sort: [POPULARITY_DESC], genre: $genre, search: $search) {
+            id
+            title {
+                romaji
+                native
+            }
+            genres
+            averageScore
+            rankings {
+                rank
+            }
+            description
+            startDate {
+                year
+                month
+            }
+            endDate {
+                year
+                month
+            }
+            seasonYear
+            coverImage {
+                extraLarge
+            }
+        }
+    }
+}
+
+query getRecs($mediaRecommendationId: Int) {
+    Page{
+        pageInfo {
+            total
+        }
+        recommendations(mediaRecommendationId: $mediaRecommendationId) {
+            media {
+                id
+                title {
+                    romaji
+                    native
+                }
+                genres
+                averageScore
+                rankings {
+                    rank
+                }
+                description
+                startDate {
+                    year
+                    month
+                }
+                endDate {
+                    year
+                    month
+                }
+                seasonYear
+                coverImage {
+                    extraLarge
+                }
+            }
+        }
+    }
+}

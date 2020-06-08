@@ -62,7 +62,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                     FragmentManager fragMan = getSupportFragmentManager();
                     fragMan.beginTransaction().replace(R.id.fragment_container,
-                            selectedFragment).commit();
+                            selectedFragment)
+//                            .addToBackStack("tag")
+                            .commit();
                     return true;
                 }
             };
@@ -80,5 +82,5 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //
 //    }
-//
+
 }

@@ -262,3 +262,49 @@ query getRecs($mediaRecommendationId: Int) {
         }
     }
 }
+
+query getUserRecs($id: Int) {
+    Media(id: $id) {
+        title {
+            romaji
+            english
+            native
+            userPreferred
+        }
+        recommendations(sort: [RATING_DESC]) {
+            pageInfo {
+                total
+            }
+            edges {
+                node {
+                    mediaRecommendation {
+                        id
+                        title {
+                            romaji
+                            native
+                        }
+                        genres
+                        averageScore
+                        rankings {
+                            rank
+                        }
+                        description
+                        startDate {
+                            year
+                            month
+                        }
+                        endDate {
+                            year
+                            month
+                        }
+                        seasonYear
+                        coverImage {
+                            extraLarge
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}

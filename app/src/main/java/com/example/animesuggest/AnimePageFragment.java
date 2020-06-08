@@ -31,6 +31,7 @@ import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
 import com.example.AnimeDataQuery;
 import com.example.GetRecsQuery;
+import com.example.GetUserRecsQuery;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
@@ -201,22 +202,22 @@ public class AnimePageFragment extends Fragment {
 
         // for recycler view
         apolloClient.query(
-                GetRecsQuery.builder()
-                        .mediaRecommendationId(id)
+                GetUserRecsQuery.builder()
+                        .id(id)
                         .build()
-        ).enqueue(new ApolloCall.Callback<GetRecsQuery.Data>() {
+        ).enqueue(new ApolloCall.Callback<GetUserRecsQuery.Data>() {
             @Override
-            public void onResponse(@NotNull Response<GetRecsQuery.Data> response) {
+            public void onResponse(@NotNull Response<GetUserRecsQuery.Data> response) {
                 mlist.clear();
-                int total = response.getData().Page().pageInfo().total();
+                int total = response.getData().Media().recommendations().pageInfo().total();
                 if(total > 50) {
-                    total = total - 50;
+                    total = 50;
                 }
                 for (int i = 0; i < total; i++) {
-                    rec_id = response.getData().Page().recommendations().get(i).media().id();
+                    rec_id = response.getData().Media().recommendations().edges().get(i).node().mediaRecommendation().id();
                     bundle.putInt("id", rec_id);
-                    title = response.getData().Page().recommendations().get(i).media().title().romaji();
-                    imgurl = response.getData().Page().recommendations().get(i).media().coverImage().extraLarge();
+                    title = response.getData().Media().recommendations().edges().get(i).node().mediaRecommendation().title().romaji();
+                    imgurl = response.getData().Media().recommendations().edges().get(i).node().mediaRecommendation().coverImage().extraLarge();
                     mlist.add(new AnimeCard(rec_id, title, imgurl));
                 }
 
@@ -252,6 +253,58 @@ public class AnimePageFragment extends Fragment {
                 Logger.d(e.getLocalizedMessage(), "error");
             }
         });
+//        apolloClient.query(
+//                GetRecsQuery.builder()
+//                        .mediaRecommendationId(id)
+//                        .build()
+//        ).enqueue(new ApolloCall.Callback<GetRecsQuery.Data>() {
+//            @Override
+//            public void onResponse(@NotNull Response<GetRecsQuery.Data> response) {
+//                mlist.clear();
+//                int total = response.getData().Page().pageInfo().total();
+//                if(total > 50) {
+//                    total = total - 50;
+//                }
+//                for (int i = 0; i < total; i++) {
+//                    rec_id = response.getData().Page().recommendations().get(i).media().id();
+//                    bundle.putInt("id", rec_id);
+//                    title = response.getData().Page().recommendations().get(i).media().title().romaji();
+//                    imgurl = response.getData().Page().recommendations().get(i).media().coverImage().extraLarge();
+//                    mlist.add(new AnimeCard(rec_id, title, imgurl));
+//                }
+//
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        // Stuff that updates the UI
+//                        adapter = new AnimeCardAdapter(mlist, getActivity(), new AnimeCardAdapter.OnItemClickListener() {
+//                            @Override
+//                            public void onItemClicked(int position, Object object) {
+//                                Bundle bundle = new Bundle();
+//                                int newID = mlist.get(position).getId();
+//                                bundle.putInt("id", newID);
+//                                AnimePageFragment animePageFragment = new AnimePageFragment();
+//                                animePageFragment.setArguments(bundle);
+//                                getParentFragmentManager()
+//                                        .beginTransaction()
+//                                        .replace(R.id.fragment_container, animePageFragment)
+//                                        .addToBackStack("tag") // onbackpressed works!
+//                                        .commit();
+//                            }
+//                        });
+//                        recyclerView.setAdapter(adapter);
+//                        adapter.notifyDataSetChanged();
+//                    }
+//
+//                });
+//
+//            }
+//
+//            @Override
+//            public void onFailure(@NotNull ApolloException e) {
+//                Logger.d(e.getLocalizedMessage(), "error");
+//            }
+//        });
         return view;
 
     }

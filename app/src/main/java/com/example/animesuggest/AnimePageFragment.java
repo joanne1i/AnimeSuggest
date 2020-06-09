@@ -210,8 +210,8 @@ public class AnimePageFragment extends Fragment {
             public void onResponse(@NotNull Response<GetUserRecsQuery.Data> response) {
                 mlist.clear();
                 int total = response.getData().Media().recommendations().pageInfo().total();
-                if(total > 50) {
-                    total = 50;
+                if(total > 25) {
+                    total = 25;
                 }
                 for (int i = 0; i < total; i++) {
                     rec_id = response.getData().Media().recommendations().edges().get(i).node().mediaRecommendation().id();
